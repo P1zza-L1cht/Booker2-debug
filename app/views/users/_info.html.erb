@@ -10,22 +10,31 @@
   </tr>
   <tr>
     <th>follows</th>
-    <th><%= user.follower.count %></th>
+    <th>
+      <%= link_to(followings_user_path(user)) do %>
+      <%= user.follower.count %></th>
+      <% end %>
   </tr>
 	<tr>
 	  <th>followers</th>
-	  <th><%= user.followed.count %></th>
+	  <th>
+	    <%= link_to(followers_user_path(user)) do %>
+	    <%= user.followed.count %>
+	    <% end %>
+	    </th>
 	  </tr>
 </table>
 <div>
 <% unless user == current_user %>
   <% if current_user.following?(user) %>
-    <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST %>
+    <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST, class: "btn btn-sm btn-info" %>
   <% else %>
-    <%= link_to 'フォローする', follow_path(user.id), method: :POST %>
+    <%= link_to 'フォローする', follow_path(user.id), method: :POST, class: "btn btn-sm btn-success" %>
   <% end %>
 <% end %>
 </div>
+<% if user == current_user %>
 <div class='row'>
   <%= link_to '',edit_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
 </div>
+<% end %>
