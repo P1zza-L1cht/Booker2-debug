@@ -12,9 +12,9 @@ class Book < ApplicationRecord
 			@book = Book.where("title LIKE?","#{word}%")
 		elsif search == "backward_match"
 			@book = Book.where("title LIKE?","%#{word}")
-    elsif search == "perfect_match"
+		elsif search == "perfect_match"
     	@book = Book.where(title: word)
-    elsif search == "partial_match"
+   	elsif search == "partial_match"
     	@book = Book.where("title LIKE?","%#{word}%")
     else
     	@book = Book.all
@@ -23,4 +23,6 @@ class Book < ApplicationRecord
 
 	validates :title, presence: true
 	validates :body, presence: true, length: {maximum: 200}
+  validates :score, presence: true, uniqueness: true
+
 end
