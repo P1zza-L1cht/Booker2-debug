@@ -18,7 +18,27 @@
     </div>
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
-      <%= render 'index', books: @books%>
+      <ul>
+        <li class="sort"><a href="#tab1" class="current">新しい順</a></li>
+        <li class="sort">|</li>
+        <li class="sort"><a href="#tab2">評価の高い順</a></li>
+      </ul>
+      <div id="contents">
+        <div id="tab1"><%= render 'index', books: @books%></div>
+        <div id="tab2"><%= render 'index', books: @books_rate%></div>
+      </div>
     </div>
   </div>
 </div>
+<script>
+  $(function(){
+    $('#contents div[id != "tab1"]').hide();
+    $("a").click(function(){
+      $("#contents div").hide();
+      $($(this).attr("href")).show();
+      $(".current").removeClass("current");
+      $(this).addClass("current");
+      return false;
+    });
+  });
+</script>
