@@ -11,7 +11,13 @@
     <%= f.label :Rate %>
     <%= f.hidden_field :score, id: :review_star, class: 'form-control ' %>
   </div>
-  <script>
+  <div class="form-group">
+    <%= f.submit class: 'btn btn-success' %>
+  </div>
+<% end %>
+
+<% if book.score == nil %>
+<script>
     $('#star').raty({
       size: 32,
       starOff: '<%= asset_path('star-off.png') %>',
@@ -19,10 +25,20 @@
       starHalf: '<%= asset_path('star-half.png') %>',
       scoreName: 'book[score]',
       half: true,
+    });
+</script>
+<% else %>
+<script>
+    $('#star').raty({
+      size: 32,
+      starOff: '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      scoreName: 'book[score]',
+      half: true,
+      readOnly: true,
       score: <%= book.score %>,
     });
-  </script>
-  <div class="form-group">
-    <%= f.submit class: 'btn btn-success' %>
-  </div>
+</script>
 <% end %>
+
